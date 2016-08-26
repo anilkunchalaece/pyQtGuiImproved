@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>prepare2Pg</class>
+ <widget class="QMainWindow" name="prepare2Pg">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1054</width>
+    <height>777</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QLabel" name="medPg">
+        <property name="text">
+         <string>MED PG</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="testNameLabel">
+        <property name="text">
+         <string>TEST NAME</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLCDNumber" name="lcdNumber">
+        <property name="maximumSize">
+         <size>
+          <width>150</width>
+          <height>70</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_4">
+      <item>
+       <widget class="QLabel" name="QuestionLabel">
+        <property name="text">
+         <string>This is a question ???</string>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout_5">
+      <item>
+       <widget class="QGroupBox" name="groupBox">
+        <property name="title">
+         <string>GroupBox</string>
+        </property>
+        <widget class="QWidget" name="">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>1021</width>
+           <height>141</height>
+          </rect>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <item>
+           <widget class="QRadioButton" name="optARadioButton">
+            <property name="text">
+             <string>RadioButton</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="optBRadioButton">
+            <property name="text">
+             <string>RadioButton</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="optCRadioButton">
+            <property name="text">
+             <string>RadioButton</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="optDRadioButton">
+            <property name="text">
+             <string>RadioButton</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QPushButton" name="previousBtn">
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>70</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Previous</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="nextBtn">
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>70</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Next</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="reviewBtn">
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>70</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Mark for review</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="submitBtn">
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>70</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Submit</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="endTestBtn">
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>70</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>End Test</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <widget class="QWidget" name="widget" native="true">
+        <widget class="QScrollArea" name="scrollArea">
+         <property name="geometry">
+          <rect>
+           <x>-1</x>
+           <y>-1</y>
+           <width>1041</width>
+           <height>141</height>
+          </rect>
+         </property>
+         <property name="widgetResizable">
+          <bool>true</bool>
+         </property>
+         <widget class="QWidget" name="scrollAreaWidgetContents">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>1039</width>
+            <height>139</height>
+           </rect>
+          </property>
+          <layout class="QGridLayout" name="gridLayout">
+           <item row="0" column="0">
+            <widget class="QPushButton" name="scrollBtn">
+             <property name="text">
+              <string>PushButton</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1054</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
