@@ -1,3 +1,6 @@
+#Author : Kunchala Anil
+#Date : Aug 27 2016
+#Email : anilkunchalaece@gmail.com
 #Import the Layout
 from orgLayout import Ui_prepare2Pg
 #import the TestData
