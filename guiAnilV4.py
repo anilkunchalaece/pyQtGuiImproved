@@ -37,7 +37,8 @@ class guiLogic(Ui_prepare2Pg):
         for i in range (50):
             btn = "scrollBtn"+str(i)
             btn = QtGui.QPushButton(ui.scrollAreaWidgetContents)
-            btn.setText("Dict Nunmer")
+            btnText = "Button " + str(i)
+            btn.setText(btnText)
             btn.setCheckable(True)
             btn.toggle()
             btn.clicked.connect(self.scrollFcn)
@@ -62,6 +63,7 @@ class guiLogic(Ui_prepare2Pg):
 
     def scrollFcn(self):
         print "Scroll Btn Clicked"
+        print MainWindow.sender().text() #this will grab the Pushbutton Reference Object From Mainwindow which is used to access the Btn Data
 
     
     def setupLogic(self):
