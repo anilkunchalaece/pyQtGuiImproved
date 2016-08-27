@@ -1,4 +1,7 @@
-
+#Author : Kunchala Anil
+#Email : anilkunchalaece
+#date : Aug 27 2016
+import csv
 class TestData(object):
     def __init__(self):
         f = open('anatomy_questions.csv','rt')
@@ -20,7 +23,6 @@ class TestData(object):
         f.close()
         
 if __name__ == "__main__":
-    import csv,re
     data = TestData()
     print "no of Questions"
     print len(data.keys)

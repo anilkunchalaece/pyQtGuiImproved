@@ -4,6 +4,8 @@
 
 #Import the Layout
 from orgLayout import Ui_prepare2Pg
+#import csv for TestData
+import csv
 #import the TestData
 from testData import TestData
 #Import the PyQt Core and Gui Libraries
@@ -29,37 +31,33 @@ class guiLogic(Ui_prepare2Pg):
         self.setupLogic()
         self.data = TestData()
         self.maxQuestions = len(self.data.queDict)
+        self.rows = 10
         self.resultDict = { }
         self.selectedOption = 'n'
+        self.x = 0
+        self.y = 0
+
         self.addScrollArea()
 
     def addScrollArea(self):
-        for i in range (50):
-            btn = "scrollBtn"+str(i)
+        for key in range (len(self.data.keys)):
+            btn = str(key)
             btn = QtGui.QPushButton(ui.scrollAreaWidgetContents)
-            btnText = "Button " + str(i)
+            btnText = str(key)
             btn.setText(btnText)
             btn.setCheckable(True)
             btn.toggle()
             btn.clicked.connect(self.scrollFcn)
         
-            if i<=10:
-                x = 0
-                y = i
-            elif i <= 20:
-                x= 1
-                y = i - 10
-            elif i<=30:
-                x = 2
-                y = i-20
-            elif i <= 40:
-                x = 3
-                y = i - 30
+            if key <= self.rows:
+                self.y = self.y + 1
+
             else:
-                x = 4
-                y = i - 40
-            
-            ui.gridLayout.addWidget(btn,x,y)
+
+                self.x = self.x+1
+                self.y = 0
+                self.rows = self.rows * 2
+            ui.gridLayout.addWidget(btn,self.x,self.y)
 
     def scrollFcn(self):
         print "Scroll Btn Clicked"
