@@ -38,19 +38,20 @@ class guiLogic(Ui_prepare2Pg):
         self.selectedOption = 'n'
         self.x = 0
         self.y = 0
+        self.btn = {}
 
         self.addScrollArea()
         self.setupLogic()
 
     def addScrollArea(self):
         for key in range (len(self.data.keys)):
-            btn = str(key)
-            btn = QtGui.QPushButton(ui.scrollAreaWidgetContents)
-            btnText = str(key)
-            btn.setText(btnText)
-            btn.setCheckable(True)
-            btn.toggle()
-            btn.clicked.connect(self.scrollFcn)
+            self.btnKey = str(key+1)
+            self.btn[self.btnKey] = QtGui.QPushButton(ui.scrollAreaWidgetContents)
+            self.btnText = str(key+1)
+            self.btn[self.btnKey].setText(self.btnText)
+            self.btn[self.btnKey].setCheckable(True)
+            self.btn[self.btnKey].toggle()
+            self.btn[self.btnKey].clicked.connect(self.scrollFcn)
         
             if key < self.rows:
                 if key == 0:
@@ -63,16 +64,19 @@ class guiLogic(Ui_prepare2Pg):
                 self.x = self.x+1
                 self.y = 0
                 self.rows = self.rows + self.rowAddition
-            print "x" + str(self.x)
-            print "y" + str(self.y)
-            print "key" + str(key)
-            print "self.rows" + str(self.rows)
+#           print "x" + str(self.x)
+#            print "y" + str(self.y)
+#            print "key" + str(key)
+#            print "self.rows" + str(self.rows)
             
-            ui.gridLayout.addWidget(btn,self.x,self.y)
+            ui.gridLayout.addWidget(self.btn[self.btnKey],self.x,self.y)
+#            print self.btn[self.btnKey]
 
     def scrollFcn(self):
         print "Scroll Btn Clicked"
         print MainWindow.sender().text() #this will grab the Pushbutton Reference Object From Mainwindow which is used to access the Btn Data
+        #when the scroll Btn is Pressed with Reference Key Id call retranslateUi with key function
+        self.retranslateUi(MainWindow.sender().text())
 
     
     def setupLogic(self):
@@ -110,6 +114,11 @@ class guiLogic(Ui_prepare2Pg):
 
     def reviewFcn(self):
         print "Review Btn Pressed"
+        self.changeColor(self.questionIndex)
+
+    def changeColor(self,Qindex):
+#        print self.btn[str(Qindex)]
+        self.btn[str(Qindex)].setStyleSheet("background-color: red")
 
     def submitFcn(self):
         print "Submit Btn Pressed"
