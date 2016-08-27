@@ -76,6 +76,7 @@ class guiLogic(Ui_prepare2Pg):
         print "Scroll Btn Clicked"
         print MainWindow.sender().text() #this will grab the Pushbutton Reference Object From Mainwindow which is used to access the Btn Data
         #when the scroll Btn is Pressed with Reference Key Id call retranslateUi with key function
+        self.questionIndex = int(MainWindow.sender().text())
         self.retranslateUi(MainWindow.sender().text())
 
     
@@ -114,12 +115,15 @@ class guiLogic(Ui_prepare2Pg):
 
     def reviewFcn(self):
         print "Review Btn Pressed"
-        self.changeColor(self.questionIndex)
+        self.changeColor(self.questionIndex,'r')
 
-    def changeColor(self,Qindex):
+    def changeColor(self,Qindex,color):
 #        print self.btn[str(Qindex)]
-        self.btn[str(Qindex)].setStyleSheet("background-color: red")
-
+        if color == 'r':
+            bgColor = "background-color: red"
+        else :
+            bgColor = "background-color: green"
+        self.btn[str(Qindex)].setStyleSheet(bgColor)
     def submitFcn(self):
         print "Submit Btn Pressed"
 
@@ -138,7 +142,8 @@ class guiLogic(Ui_prepare2Pg):
         else:
             print "No Option selected"
             self.selectedOption = 'N'
-        self.resultDict[self.questionIndex] = self.selectedOption
+        self.resultDict[self.questionIndex] = self.selectedOption #Store the Result in Dict
+        self.changeColor(self.questionIndex,'g') #Change the Color
         
     def endTestFcn(self):
         print "endTest Btn Pressed"
