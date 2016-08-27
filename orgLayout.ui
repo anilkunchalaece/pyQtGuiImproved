@@ -64,7 +64,7 @@
         <property name="title">
          <string>GroupBox</string>
         </property>
-        <widget class="QWidget" name="">
+        <widget class="QWidget" name="layoutWidget">
          <property name="geometry">
           <rect>
            <x>0</x>
@@ -186,8 +186,8 @@
           <rect>
            <x>-1</x>
            <y>-1</y>
-           <width>1041</width>
-           <height>141</height>
+           <width>1031</width>
+           <height>131</height>
           </rect>
          </property>
          <property name="widgetResizable">
@@ -198,19 +198,11 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>1039</width>
-            <height>139</height>
+            <width>1029</width>
+            <height>129</height>
            </rect>
           </property>
-          <layout class="QGridLayout" name="gridLayout">
-           <item row="0" column="0">
-            <widget class="QPushButton" name="scrollBtn">
-             <property name="text">
-              <string>PushButton</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
+          <layout class="QGridLayout" name="gridLayout"/>
          </widget>
         </widget>
        </widget>

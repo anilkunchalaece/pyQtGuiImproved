@@ -2,6 +2,8 @@
 #Date : 27 Aug 2016
 #Email : anilkunchalaece@gmail.com
 
+#Check the Automatic Button Genration Clearly Ref guiAnilV3.py
+
 #Import the Layout
 from orgLayout import Ui_prepare2Pg
 #import csv for TestData
@@ -28,16 +30,17 @@ except AttributeError:
 class guiLogic(Ui_prepare2Pg):
     def __init__(self):
         self.questionIndex = 1
-        self.setupLogic()
         self.data = TestData()
         self.maxQuestions = len(self.data.queDict)
         self.rows = 10
+        self.rowAddition = self.rows
         self.resultDict = { }
         self.selectedOption = 'n'
         self.x = 0
         self.y = 0
 
         self.addScrollArea()
+        self.setupLogic()
 
     def addScrollArea(self):
         for key in range (len(self.data.keys)):
@@ -49,14 +52,22 @@ class guiLogic(Ui_prepare2Pg):
             btn.toggle()
             btn.clicked.connect(self.scrollFcn)
         
-            if key <= self.rows:
-                self.y = self.y + 1
+            if key < self.rows:
+                if key == 0:
+                    self.y = 0
+                    self.x = 0
+                else:
+                    self.y = self.y + 1
 
             else:
-
                 self.x = self.x+1
                 self.y = 0
-                self.rows = self.rows * 2
+                self.rows = self.rows + self.rowAddition
+            print "x" + str(self.x)
+            print "y" + str(self.y)
+            print "key" + str(key)
+            print "self.rows" + str(self.rows)
+            
             ui.gridLayout.addWidget(btn,self.x,self.y)
 
     def scrollFcn(self):
