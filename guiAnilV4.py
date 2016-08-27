@@ -34,19 +34,34 @@ class guiLogic(Ui_prepare2Pg):
         self.addScrollArea()
 
     def addScrollArea(self):
-        for i in range (25):
+        for i in range (50):
             btn = "scrollBtn"+str(i)
             btn = QtGui.QPushButton(ui.scrollAreaWidgetContents)
-            btn.setText("Scroll")
-            if i<=25:
+            btn.setText("Dict Nunmer")
+            btn.setCheckable(True)
+            btn.toggle()
+            btn.clicked.connect(self.scrollFcn)
+        
+            if i<=10:
                 x = 0
                 y = i
-            elif i <= 50:
+            elif i <= 20:
                 x= 1
-                y = i - 25
-            
+                y = i - 10
+            elif i<=30:
+                x = 2
+                y = i-20
+            elif i <= 40:
+                x = 3
+                y = i - 30
+            else:
+                x = 4
+                y = i - 40
             
             ui.gridLayout.addWidget(btn,x,y)
+
+    def scrollFcn(self):
+        print "Scroll Btn Clicked"
 
     
     def setupLogic(self):
