@@ -198,10 +198,13 @@ class guiLogic(Ui_prepare2Pg):
         ui.optDRadioButton.setText(_translate("prepare2Pg", newLogic.data.optDDict[str(QIndex)], None))
         
         #this logic has to be worked On.. This is A "BUG" i cant Find
+        # Aug 28 -Create A Button Group - http://stackoverflow.com/questions/29270307/how-can-i-change-the-name-of-a-qbuttongroup-in-qt-designer 
+        ui.buttonGroup.setExclusive(False)
         ui.optARadioButton.setChecked(False)
         ui.optBRadioButton.setChecked(False)
         ui.optCRadioButton.setChecked(False)
         ui.optDRadioButton.setChecked(False)
+        ui.buttonGroup.setExclusive(True)
                   
         
 
