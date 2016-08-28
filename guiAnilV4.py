@@ -75,6 +75,8 @@ class guiLogic(Ui_prepare2Pg):
 
         self.addScrollArea() #add scroll area when object is called
         self.setupLogic()#start the logic.. (I dont find a Good name for that method)
+        self.timerValue = 0;
+        self.startTimer();
 
     def addScrollArea(self):
         for key in range (len(self.data.keys)):
@@ -112,6 +114,24 @@ class guiLogic(Ui_prepare2Pg):
         self.questionIndex = int(MainWindow.sender().text())# from the Object get the Text of Function which is Same as Uid of Question
         self.retranslateUi(self.questionIndex) # Display the respscted QUestion using Question Index
 
+    def updateLcd(self):
+        ##http://stackoverflow.com/questions/775049/python-time-seconds-to-hms
+        # this function increments the self.timerValue variable which is converted to hh:mm:ss 
+        m, s = divmod(self.timerValue, 60)
+        h, m = divmod(m, 60)
+        self.time = str(h) + ':' + str(m)+':'+str(s) 
+        ui.lcdNumber.display(self.time)
+        self.timerValue = self.timerValue + 1
+
+    def startTimer(self):
+        #Start the timer at the Begining of the Test
+        #for every 1 sec call the updateLcd Function 
+        ui.lcdNumber.setDigitCount(8)
+        self.timer = QtCore.QTimer()
+        self.timer.timeout.connect(self.updateLcd)
+        self.timer.start(1000) 
+        ui.lcdNumber.show() 
+        ui.lcdNumber.display('0:0:0')
     
     def setupLogic(self):
         #Assign the Duties for Buttons
@@ -198,7 +218,8 @@ class guiLogic(Ui_prepare2Pg):
         ui.optDRadioButton.setText(_translate("prepare2Pg", newLogic.data.optDDict[str(QIndex)], None))
         
         #this logic has to be worked On.. This is A "BUG" i cant Find
-        # Aug 28 -Create A Button Group - http://stackoverflow.com/questions/29270307/how-can-i-change-the-name-of-a-qbuttongroup-in-qt-designer 
+        # Aug 28 -Create A Button Group - http://stackoverflow.com/questions/29270307/how-can-i-change-the-name-of-a-qbuttongroup-in-qt-designer
+        # http://stackoverflow.com/questions/8689909/uncheck-radiobutton-pyqt4
         ui.buttonGroup.setExclusive(False)
         ui.optARadioButton.setChecked(False)
         ui.optBRadioButton.setChecked(False)
