@@ -1,8 +1,8 @@
 #Author : Kunchala Anil
-#Date : 27 Aug 2016
+#Date : 28 Aug 2016
 #Email : anilkunchalaece@gmail.com
 
-#Check the Automatic Button Genration Clearly Ref guiAnilV3.py
+#Check the Automatic Button Genration Clearly - Ref guiAnilV3.py
 
 #Import the Layout
 from orgLayout import Ui_prepare2Pg
@@ -25,34 +25,67 @@ try:
 except AttributeError:
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig)
+"""
+The Function of Buttons are as follows:
 
+PREVIOUS BUTTON :
+    it is used to move to i.e displays the previous Question
+
+NEXT BUTTON :
+    it is used to move to i.e displays the next question
+
+SUBMIT BUTTON ;
+    it is used to submit the Answer for the respective Question
+    when user clicks the submit button, it changes the color to green
+    
+MARK FOR REVIEW :
+    it is used to select the Respective question to review later. When User clicks this button
+    respective button changes the color to red
+
+END TEST :
+    this is used to display the "resDict" which stores the Uid as key and user option as Value
+
+
+Question Index is the anchor of total Program we use Question Index to Move to the Next and Previous Question
+
+In Scroll area Buttons are created using the for loop.
+Each button name i.e text is set as its Uid Number so we will make a dict "btn" and store the Uid as key and
+and generated object as value. it is useful when we try to access the questions when corresponding button is clicked
+in scroll area
+
+TestData Object will generate a Few instanece Variable named as queDict,optADict,optBDict,
+optCDict.optDDict and keys which holds the Question,optA,optB,optC,optD as Dictionaries where keys
+is the key value for Each Dict variables
+
+
+"""
 
 class guiLogic(Ui_prepare2Pg):
     def __init__(self):
-        self.questionIndex = 1
-        self.data = TestData()
-        self.maxQuestions = len(self.data.queDict)
-        self.rows = 10
-        self.rowAddition = self.rows
-        self.resultDict = { }
-        self.selectedOption = 'n'
-        self.x = 0
+        self.questionIndex = 1 #variable to hold the questionIndex it is hero of our movie
+        self.data = TestData() # Create a TestData Object which supply necessary Ingredients
+        self.maxQuestions = len(self.data.queDict) # 
+        self.rows = 10 # it is used to hold the  max no of rows we want in scroll widget
+        self.rowAddition = self.rows #this is just a copy of rows value which is used in Automatic generation of btn's in Scroll Area
+        self.resultDict = { } # it holds the user selected Options
+        self.selectedOption = 'n' # Default option
+        self.x = 0 # x and y values supply as co-ordinates in grid layout in Scroll widget 
         self.y = 0
-        self.btn = {}
+        self.btn = {} #this will hold the ScrollArea Btn's with name and Object as Key and Value Pairs
 
-        self.addScrollArea()
-        self.setupLogic()
+        self.addScrollArea() #add scroll area when object is called
+        self.setupLogic()#start the logic.. (I dont find a Good name for that method)
 
     def addScrollArea(self):
         for key in range (len(self.data.keys)):
-            self.btnKey = str(key+1)
-            self.btn[self.btnKey] = QtGui.QPushButton(ui.scrollAreaWidgetContents)
-            self.btnText = str(key+1)
-            self.btn[self.btnKey].setText(self.btnText)
-            self.btn[self.btnKey].setCheckable(True)
+            self.btnKey = str(key+1) #added 1 to key since for loop starts from '0' and Question Index starts from 1
+            self.btn[self.btnKey] = QtGui.QPushButton(ui.scrollAreaWidgetContents) # generate pushbutton object and add that object to dictionary for future Reference
+            self.btnText = str(key+1) #set the text as key value which is used as reference to Respectiv Question
+            self.btn[self.btnKey].setText(self.btnText) #Add the test to the btn
+#            self.btn[self.btnKey].setCheckable(True)
             self.btn[self.btnKey].toggle()
-            self.btn[self.btnKey].clicked.connect(self.scrollFcn)
-        
+            self.btn[self.btnKey].clicked.connect(self.scrollFcn) #Add the event handler to the Btn.. all the Btns in Scroll area are assigned to same Callback Function i.e scrollFcn
+        #Take some time and look at this Logic.. it eats more time for me
             if key < self.rows:
                 if key == 0:
                     self.y = 0
@@ -63,50 +96,33 @@ class guiLogic(Ui_prepare2Pg):
             else:
                 self.x = self.x+1
                 self.y = 0
-                self.rows = self.rows + self.rowAddition
+                self.rows = self.rows + self.rowAddition #Particularly this line
 #           print "x" + str(self.x)
 #            print "y" + str(self.y)
 #            print "key" + str(key)
 #            print "self.rows" + str(self.rows)
             
-            ui.gridLayout.addWidget(self.btn[self.btnKey],self.x,self.y)
+            ui.gridLayout.addWidget(self.btn[self.btnKey],self.x,self.y) # Add the Button to Widget
 #            print self.btn[self.btnKey]
 
     def scrollFcn(self):
         print "Scroll Btn Clicked"
         print MainWindow.sender().text() #this will grab the Pushbutton Reference Object From Mainwindow which is used to access the Btn Data
         #when the scroll Btn is Pressed with Reference Key Id call retranslateUi with key function
-        self.questionIndex = int(MainWindow.sender().text())
-        self.retranslateUi(MainWindow.sender().text())
+        self.questionIndex = int(MainWindow.sender().text())# from the Object get the Text of Function which is Same as Uid of Question
+        self.retranslateUi(self.questionIndex) # Display the respscted QUestion using Question Index
 
     
     def setupLogic(self):
-        
-
-        ui.nextBtn.setCheckable(True)
-        ui.nextBtn.toggle()
+        #Assign the Duties for Buttons
         ui.nextBtn.clicked.connect(self.nextFcn)
-
-        ui.reviewBtn.setCheckable(True)
-        ui.reviewBtn.toggle()
         ui.reviewBtn.clicked.connect(self.reviewFcn)
-
-        ui.submitBtn.setCheckable(True)
-        ui.submitBtn.toggle()
         ui.submitBtn.clicked.connect(self.submitFcn)
-
-        ui.endTestBtn.setCheckable(True)
-        ui.endTestBtn.toggle()
         ui.endTestBtn.clicked.connect(self.endTestFcn)
-
-        ui.previousBtn.setCheckable(True)
-        ui.previousBtn.toggle()
         ui.previousBtn.clicked.connect(self.previousFcn)
-
-        
-
-
+      
     def nextFcn(self):
+        #when next Btn is pressed increment the questionIndex and Display the Question using Index
         print "Next Btn Selected"
         self.questionIndex=newLogic.questionIndex+1
         if self.questionIndex > self.maxQuestions :
@@ -114,17 +130,26 @@ class guiLogic(Ui_prepare2Pg):
         self.retranslateUi(newLogic.questionIndex)
 
     def reviewFcn(self):
+        #when Review Btn is Pressed change the color of respective Btn
         print "Review Btn Pressed"
         self.changeColor(self.questionIndex,'r')
 
     def changeColor(self,Qindex,color):
+        #this function takes Qindex and Color as arguments
+        #Using QIndex we Access the respective Object using "btn" Dictonary created in the Automatic scrollArea Button Addition
+        #we change the Qindex to str since Dic Key value is String
 #        print self.btn[str(Qindex)]
         if color == 'r':
             bgColor = "background-color: red"
         else :
             bgColor = "background-color: green"
-        self.btn[str(Qindex)].setStyleSheet(bgColor)
+        self.btn[str(Qindex)].setStyleSheet(bgColor) #Change the color of Respective Btn
+        
     def submitFcn(self):
+        # When submit button is pressed see which of the toggle button is checked and select the option accordingly
+        # and the store the respective value to the resulDict with QIndex as Key
+        # then Change the color of the Respective Button is Scroll btn usinf Qindex 
+        
         print "Submit Btn Pressed"
 
         if ui.optARadioButton.isChecked():
@@ -146,11 +171,14 @@ class guiLogic(Ui_prepare2Pg):
         self.changeColor(self.questionIndex,'g') #Change the Color
         
     def endTestFcn(self):
+        #when endTest btn is clicked Print the Resulting Dict
+        
         print "endTest Btn Pressed"
         print "Output Dict is "
         print self.resultDict
 
     def previousFcn(self):
+        #when previous btn is clicked decrement the Qindex value and Display the respective Question using Qindex
         print "Previous Btn Pressed"
         newLogic.questionIndex=newLogic.questionIndex-1
         if self.questionIndex == 0:
@@ -159,6 +187,9 @@ class guiLogic(Ui_prepare2Pg):
         newLogic.retranslateUi(newLogic.questionIndex)
 
     def retranslateUi(self,QIndex):
+        #this function takes QIndex as argument
+        #where Qindex is Key value in Data
+        #using key values we set the Text of Question label and optA,B,C and D Radio Buttons 
         ui.testNameLabel.setText(_translate("prepare2Pg", "TEST NAME", None))
         ui.QuestionLabel.setText(_translate("prepare2Pg", newLogic.data.queDict[str(QIndex)], None))
         ui.optARadioButton.setText(_translate("prepare2Pg", newLogic.data.optADict[str(QIndex)], None))
@@ -166,7 +197,7 @@ class guiLogic(Ui_prepare2Pg):
         ui.optCRadioButton.setText(_translate("prepare2Pg", newLogic.data.optCDict[str(QIndex)], None))
         ui.optDRadioButton.setText(_translate("prepare2Pg", newLogic.data.optDDict[str(QIndex)], None))
         
-        
+        #this logic has to be worked On.. This is A "BUG" i cant Find
         ui.optARadioButton.setChecked(False)
         ui.optBRadioButton.setChecked(False)
         ui.optCRadioButton.setChecked(False)
@@ -183,7 +214,6 @@ if __name__ == "__main__":
     ui = Ui_prepare2Pg()
     ui.setupUi(MainWindow)
     MainWindow.show()
-
     newLogic = guiLogic()
     newLogic.retranslateUi(newLogic.questionIndex)
     
