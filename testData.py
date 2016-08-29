@@ -32,6 +32,11 @@ The Received Data is in the Form
 First get the List of Question&Options
 Then Cut the String in the list into Uid,Question,optA,optB,optC,optD
 
+
+on 29 aug the Modification included is the Key Assigned to the Each question is Different to the Uid came from Post Request
+The Automatically Added Key and Uid is added to the keyDict where key is the Question key in Exam and value is the Uid of the
+Original Question
+
 """
         self.getQue = r"\<q\>(.+?)\<\/q\>" #re pattern used to split the received data into List Questions
 
