@@ -113,6 +113,23 @@ class guiLogic(Ui_prepare2Pg):
         #when the scroll Btn is Pressed with Reference Key Id call retranslateUi with key function
         self.questionIndex = int(MainWindow.sender().text())# from the Object get the Text of Function which is Same as Uid of Question
         self.retranslateUi(self.questionIndex) # Display the respscted QUestion using Question Index
+        self.showPreviosOption(self.questionIndex)
+
+    def showPreviosOption(self,QIndex):
+        #TO Highlight the user Selected Option If user Comes back - Check Issue : https://github.com/anilkunchalaece/pyQtGuiImproved/issues/1
+        self.checked = self.resultDict.get(QIndex,False)
+        if self.checked:
+            print self.checked
+            if self.checked == 'A':
+                ui.optARadioButton.setChecked(True)
+            elif self.checked == 'B':
+                ui.optBRadioButton.setChecked(True)
+            elif self.checked == 'C':
+                ui.optCRadioButton.setChecked(True)
+            elif self.checked == 'D':
+                ui.optDRadioButton.setChecked(True)
+                
+                
 
     def updateLcd(self):
         ##http://stackoverflow.com/questions/775049/python-time-seconds-to-hms
@@ -148,6 +165,7 @@ class guiLogic(Ui_prepare2Pg):
         if self.questionIndex > self.maxQuestions :
             self.questionIndex = 1
         self.retranslateUi(newLogic.questionIndex)
+        self.showPreviosOption(self.questionIndex)
 
     def reviewFcn(self):
         #when Review Btn is Pressed change the color of respective Btn
@@ -161,8 +179,10 @@ class guiLogic(Ui_prepare2Pg):
 #        print self.btn[str(Qindex)]
         if color == 'r':
             bgColor = "background-color: red"
-        else :
+        elif color == 'g' :
             bgColor = "background-color: green"
+        elif color == 'y' :
+            bgColor = "background-color: yellow"
         self.btn[str(Qindex)].setStyleSheet(bgColor) #Change the color of Respective Btn
         
     def submitFcn(self):
@@ -205,6 +225,7 @@ class guiLogic(Ui_prepare2Pg):
             self.questionIndex = self.maxQuestions
             
         newLogic.retranslateUi(newLogic.questionIndex)
+        self.showPreviosOption(self.questionIndex)
 
     def retranslateUi(self,QIndex):
         #this function takes QIndex as argument
